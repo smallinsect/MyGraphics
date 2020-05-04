@@ -121,9 +121,24 @@ void C基础图形View::OnLButtonUp(UINT nFlags, CPoint point)
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 	p1 = point;
 	CDC* pDC = GetDC();
-	pDC->MoveTo(p0);
-	pDC->LineTo(p1);
+	CPen NewPen, *pOldPen;
+	NewPen.CreatePen(PS_SOLID, 3, RGB(255, 0, 0));
+	pOldPen = pDC->SelectObject(&NewPen);
+
+	CBrush NewBrush, * pOldBrush;
+	NewBrush.CreateSolidBrush(RGB(0,255,0));
+	pOldBrush = pDC->SelectObject(&NewBrush);
+	
+	//pDC->MoveTo(p0);
+	//pDC->LineTo(p1);
+	//pDC->Rectangle(CRect(p0, p1));
+	pDC->Ellipse(CRect(p0, p1));
+
+	pDC->SelectObject(pOldBrush);
+	pDC->SelectObject(pOldPen);
 
 	ReleaseDC(pDC);
+	NewPen.DeleteObject();
+	NewBrush.DeleteObject();
 	CView::OnLButtonUp(nFlags, point);
 }
