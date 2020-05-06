@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "CSphere.h"
 
 class C缓冲区View : public CView
 {
@@ -17,6 +18,9 @@ public:
 
 // 操作
 public:
+	void DoubleBuffer(CDC* pDC);
+	void DrawObject(CDC* pDC);
+	void CollisionDetection();
 
 // 重写
 public:
@@ -36,10 +40,19 @@ public:
 #endif
 
 protected:
+	int nWidth;
+	int nHeight;
+
+	BOOL bPlay;
+	CSphere sphere;
+	CPoint direction;
 
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnGraphAnimation();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 #ifndef _DEBUG  // 缓冲区View.cpp 中的调试版本

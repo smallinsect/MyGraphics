@@ -27,6 +27,8 @@ BEGIN_MESSAGE_MAP(C缓冲区View, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_COMMAND(ID_32771, &C缓冲区View::OnGraphAnimation)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 // C缓冲区View 构造/析构
@@ -34,7 +36,12 @@ END_MESSAGE_MAP()
 C缓冲区View::C缓冲区View() noexcept
 {
 	// TODO: 在此处添加构造代码
-
+	bPlay = FALSE;
+	sphere.R = GetSystemMetrics(SM_CXFULLSCREEN) / 20;
+	sphere.CenterPoint.x = 200;
+	sphere.CenterPoint.y = 200;
+	direction.x = 1;
+	direction.y = 1;
 }
 
 C缓冲区View::~C缓冲区View()
@@ -51,7 +58,7 @@ BOOL C缓冲区View::PreCreateWindow(CREATESTRUCT& cs)
 
 // C缓冲区View 绘图
 
-void C缓冲区View::OnDraw(CDC* /*pDC*/)
+void C缓冲区View::OnDraw(CDC* pDC)
 {
 	C缓冲区Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -59,6 +66,45 @@ void C缓冲区View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	DoubleBuffer(pDC);
+}
+
+void C缓冲区View::DoubleBuffer(CDC* pDC) {
+	CRect rect;
+	GetClientRect(&rect);
+	nWidth = rect.Width();
+	nHeight = rect.Height();
+
+	CDC memDC;//定义内存DC
+	memDC.CreateCompatibleDC(pDC);//创建一个显示DC兼容的内存DC
+	CBitmap NewBitmap, * pOldBitmap;
+	NewBitmap.CreateCompatibleBitmap(pDC, nWidth, nHeight);//创建兼容内存位图
+	pOldBitmap = memDC.SelectObject(&NewBitmap);//兼容位图选入内存DC
+	DrawObject(&memDC);//绘制小球
+	CollisionDetection();//碰撞检测
+	pDC->BitBlt(0, 0, nWidth, nHeight, &memDC, 0, 0, SRCCOPY);//显示内存位图
+	memDC.SelectObject(pOldBitmap);
+	NewBitmap.DeleteObject();
+	memDC.DeleteDC();
+}
+
+void C缓冲区View::DrawObject(CDC* pDC) {
+	sphere.Draw(pDC);
+}
+
+void C缓冲区View::CollisionDetection() {
+	if (sphere.CenterPoint.x - sphere.R < 0) {//左边界检测
+		direction.x = 1;
+	}
+	if (sphere.CenterPoint.x + sphere.R > nWidth) {//右边界检测
+		direction.x = -1;
+	}
+	if (sphere.CenterPoint.y - sphere.R < 0) {//上边界检测
+		direction.y = 1;
+	}
+	if (sphere.CenterPoint.y + sphere.R > nHeight) {//下边界检测
+		direction.y = -1;
+	}
 }
 
 
@@ -103,3 +149,25 @@ C缓冲区Doc* C缓冲区View::GetDocument() const // 非调试版本是内联�
 
 
 // C缓冲区View 消息处理程序
+
+
+void C缓冲区View::OnGraphAnimation()
+{
+	// TODO: 在此添加命令处理程序代码
+	bPlay = !bPlay;
+	if (bPlay) {
+		SetTimer( 1, 1, NULL);
+	}
+	else {
+		KillTimer(1);
+	}
+}
+
+
+void C缓冲区View::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	sphere.CenterPoint += direction;
+	Invalidate(FALSE);
+	CView::OnTimer(nIDEvent);
+}
