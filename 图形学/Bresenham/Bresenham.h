@@ -1,5 +1,5 @@
 ﻿
-// 直线算法.h: 直线算法 应用程序的主头文件
+// Bresenham.h: Bresenham 应用程序的主头文件
 //
 #pragma once
 
@@ -10,14 +10,14 @@
 #include "resource.h"       // 主符号
 
 
-// C直线算法App:
-// 有关此类的实现，请参阅 直线算法.cpp
+// CBresenhamApp:
+// 有关此类的实现，请参阅 Bresenham.cpp
 //
 
-class C直线算法App : public CWinApp
+class CBresenhamApp : public CWinApp
 {
 public:
-	C直线算法App() noexcept;
+	CBresenhamApp() noexcept;
 
 
 // 重写
@@ -30,4 +30,4 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-extern C直线算法App theApp;
+extern CBresenhamApp theApp;

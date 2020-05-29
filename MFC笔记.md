@@ -122,6 +122,8 @@ UINT_PTR SetTimer(UINT_PTR nIDEvent, UINT nElapse, void (CALLBACK* lpfnTimer)(HW
 BOOL KillTimer(UINT_PTR nIDEvent)
 ```
 
+# Bresenham直线算法
+
 
 
 

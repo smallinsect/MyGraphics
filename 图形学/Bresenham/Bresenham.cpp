@@ -1,26 +1,26 @@
 ﻿
-// 直线算法.cpp: 定义应用程序的类行为。
+// Bresenham.cpp: 定义应用程序的类行为。
 //
 
 #include "pch.h"
 #include "framework.h"
 #include "afxwinappex.h"
 #include "afxdialogex.h"
-#include "直线算法.h"
+#include "Bresenham.h"
 #include "MainFrm.h"
 
-#include "直线算法Doc.h"
-#include "直线算法View.h"
+#include "BresenhamDoc.h"
+#include "BresenhamView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// C直线算法App
+// CBresenhamApp
 
-BEGIN_MESSAGE_MAP(C直线算法App, CWinApp)
-	ON_COMMAND(ID_APP_ABOUT, &C直线算法App::OnAppAbout)
+BEGIN_MESSAGE_MAP(CBresenhamApp, CWinApp)
+	ON_COMMAND(ID_APP_ABOUT, &CBresenhamApp::OnAppAbout)
 	// 基于文件的标准文档命令
 	ON_COMMAND(ID_FILE_NEW, &CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinApp::OnFileOpen)
@@ -29,9 +29,9 @@ BEGIN_MESSAGE_MAP(C直线算法App, CWinApp)
 END_MESSAGE_MAP()
 
 
-// C直线算法App 构造
+// CBresenhamApp 构造
 
-C直线算法App::C直线算法App() noexcept
+CBresenhamApp::CBresenhamApp() noexcept
 {
 	// 支持重新启动管理器
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
@@ -44,20 +44,20 @@ C直线算法App::C直线算法App() noexcept
 
 	// TODO: 将以下应用程序 ID 字符串替换为唯一的 ID 字符串；建议的字符串格式
 	//为 CompanyName.ProductName.SubProduct.VersionInformation
-	SetAppID(_T("直线算法.AppID.NoVersion"));
+	SetAppID(_T("Bresenham.AppID.NoVersion"));
 
 	// TODO:  在此处添加构造代码，
 	// 将所有重要的初始化放置在 InitInstance 中
 }
 
-// 唯一的 C直线算法App 对象
+// 唯一的 CBresenhamApp 对象
 
-C直线算法App theApp;
+CBresenhamApp theApp;
 
 
-// C直线算法App 初始化
+// CBresenhamApp 初始化
 
-BOOL C直线算法App::InitInstance()
+BOOL CBresenhamApp::InitInstance()
 {
 	// 如果一个运行在 Windows XP 上的应用程序清单指定要
 	// 使用 ComCtl32.dll 版本 6 或更高版本来启用可视化方式，
@@ -102,9 +102,9 @@ BOOL C直线算法App::InitInstance()
 	CSingleDocTemplate* pDocTemplate;
 	pDocTemplate = new CSingleDocTemplate(
 		IDR_MAINFRAME,
-		RUNTIME_CLASS(C直线算法Doc),
+		RUNTIME_CLASS(CBresenhamDoc),
 		RUNTIME_CLASS(CMainFrame),       // 主 SDI 框架窗口
-		RUNTIME_CLASS(C直线算法View));
+		RUNTIME_CLASS(CBresenhamView));
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
@@ -127,7 +127,7 @@ BOOL C直线算法App::InitInstance()
 	return TRUE;
 }
 
-int C直线算法App::ExitInstance()
+int CBresenhamApp::ExitInstance()
 {
 	//TODO: 处理可能已添加的附加资源
 	AfxOleTerm(FALSE);
@@ -135,7 +135,7 @@ int C直线算法App::ExitInstance()
 	return CWinApp::ExitInstance();
 }
 
-// C直线算法App 消息处理程序
+// CBresenhamApp 消息处理程序
 
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
@@ -171,13 +171,13 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // 用于运行对话框的应用程序命令
-void C直线算法App::OnAppAbout()
+void CBresenhamApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
 
-// C直线算法App 消息处理程序
+// CBresenhamApp 消息处理程序
 
 
 

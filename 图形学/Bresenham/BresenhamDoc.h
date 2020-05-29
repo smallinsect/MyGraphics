@@ -1,16 +1,16 @@
 ﻿
-// 直线算法Doc.h: C直线算法Doc 类的接口
+// BresenhamDoc.h: CBresenhamDoc 类的接口
 //
 
 
 #pragma once
 
 
-class C直线算法Doc : public CDocument
+class CBresenhamDoc : public CDocument
 {
 protected: // 仅从序列化创建
-	C直线算法Doc() noexcept;
-	DECLARE_DYNCREATE(C直线算法Doc)
+	CBresenhamDoc() noexcept;
+	DECLARE_DYNCREATE(CBresenhamDoc)
 
 // 特性
 public:
@@ -29,7 +29,7 @@ public:
 
 // 实现
 public:
-	virtual ~C直线算法Doc();
+	virtual ~CBresenhamDoc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;

@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{0259EFA2-0CF2-4C38-A020-F1F4B9071493}</ProjectGuid>
+    <ProjectGuid>{5559E864-71A0-4989-8414-10321B33088D}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
-    <RootNamespace>直线算法</RootNamespace>
+    <RootNamespace>Bresenham</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -191,16 +191,19 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bresenham.h" />
+    <ClInclude Include="BresenhamDoc.h" />
+    <ClInclude Include="BresenhamView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="直线算法.h" />
-    <ClInclude Include="直线算法Doc.h" />
-    <ClInclude Include="直线算法View.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bresenham.cpp" />
+    <ClCompile Include="BresenhamDoc.cpp" />
+    <ClCompile Include="BresenhamView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -208,20 +211,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="直线算法.cpp" />
-    <ClCompile Include="直线算法Doc.cpp" />
-    <ClCompile Include="直线算法View.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="My.rc" />
+    <ResourceCompile Include="Bresenham.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\My.rc2" />
+    <None Include="res\Bresenham.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\Bresenham.ico" />
+    <Image Include="res\BresenhamDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
-    <Image Include="res\直线算法.ico" />
-    <Image Include="res\直线算法Doc.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 ﻿
-// 直线算法Doc.cpp: C直线算法Doc 类的实现
+// BresenhamDoc.cpp: CBresenhamDoc 类的实现
 //
 
 #include "pch.h"
@@ -7,10 +7,10 @@
 // SHARED_HANDLERS 可以在实现预览、缩略图和搜索筛选器句柄的
 // ATL 项目中进行定义，并允许与该项目共享文档代码。
 #ifndef SHARED_HANDLERS
-#include "直线算法.h"
+#include "Bresenham.h"
 #endif
 
-#include "直线算法Doc.h"
+#include "BresenhamDoc.h"
 
 #include <propkey.h>
 
@@ -18,27 +18,27 @@
 #define new DEBUG_NEW
 #endif
 
-// C直线算法Doc
+// CBresenhamDoc
 
-IMPLEMENT_DYNCREATE(C直线算法Doc, CDocument)
+IMPLEMENT_DYNCREATE(CBresenhamDoc, CDocument)
 
-BEGIN_MESSAGE_MAP(C直线算法Doc, CDocument)
+BEGIN_MESSAGE_MAP(CBresenhamDoc, CDocument)
 END_MESSAGE_MAP()
 
 
-// C直线算法Doc 构造/析构
+// CBresenhamDoc 构造/析构
 
-C直线算法Doc::C直线算法Doc() noexcept
+CBresenhamDoc::CBresenhamDoc() noexcept
 {
 	// TODO: 在此添加一次性构造代码
 
 }
 
-C直线算法Doc::~C直线算法Doc()
+CBresenhamDoc::~CBresenhamDoc()
 {
 }
 
-BOOL C直线算法Doc::OnNewDocument()
+BOOL CBresenhamDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
@@ -52,9 +52,9 @@ BOOL C直线算法Doc::OnNewDocument()
 
 
 
-// C直线算法Doc 序列化
+// CBresenhamDoc 序列化
 
-void C直线算法Doc::Serialize(CArchive& ar)
+void CBresenhamDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
@@ -69,7 +69,7 @@ void C直线算法Doc::Serialize(CArchive& ar)
 #ifdef SHARED_HANDLERS
 
 // 缩略图的支持
-void C直线算法Doc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
+void CBresenhamDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
 	// 修改此代码以绘制文档数据
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
@@ -90,7 +90,7 @@ void C直线算法Doc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 }
 
 // 搜索处理程序的支持
-void C直线算法Doc::InitializeSearchContent()
+void CBresenhamDoc::InitializeSearchContent()
 {
 	CString strSearchContent;
 	// 从文档数据设置搜索内容。
@@ -100,7 +100,7 @@ void C直线算法Doc::InitializeSearchContent()
 	SetSearchContent(strSearchContent);
 }
 
-void C直线算法Doc::SetSearchContent(const CString& value)
+void CBresenhamDoc::SetSearchContent(const CString& value)
 {
 	if (value.IsEmpty())
 	{
@@ -120,19 +120,19 @@ void C直线算法Doc::SetSearchContent(const CString& value)
 
 #endif // SHARED_HANDLERS
 
-// C直线算法Doc 诊断
+// CBresenhamDoc 诊断
 
 #ifdef _DEBUG
-void C直线算法Doc::AssertValid() const
+void CBresenhamDoc::AssertValid() const
 {
 	CDocument::AssertValid();
 }
 
-void C直线算法Doc::Dump(CDumpContext& dc) const
+void CBresenhamDoc::Dump(CDumpContext& dc) const
 {
 	CDocument::Dump(dc);
 }
 #endif //_DEBUG
 
 
-// C直线算法Doc 命令
+// CBresenhamDoc 命令

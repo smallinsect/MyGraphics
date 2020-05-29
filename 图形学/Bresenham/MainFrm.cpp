@@ -4,7 +4,7 @@
 
 #include "pch.h"
 #include "framework.h"
-#include "直线算法.h"
+#include "Bresenham.h"
 
 #include "MainFrm.h"
 
