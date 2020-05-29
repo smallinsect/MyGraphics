@@ -71,20 +71,32 @@ void C缓冲区View::OnDraw(CDC* pDC)
 
 void C缓冲区View::DoubleBuffer(CDC* pDC) {
 	CRect rect;
+	//获取当前窗口大小
 	GetClientRect(&rect);
 	nWidth = rect.Width();
 	nHeight = rect.Height();
 
-	CDC memDC;//定义内存DC
-	memDC.CreateCompatibleDC(pDC);//创建一个显示DC兼容的内存DC
-	CBitmap NewBitmap, * pOldBitmap;
-	NewBitmap.CreateCompatibleBitmap(pDC, nWidth, nHeight);//创建兼容内存位图
-	pOldBitmap = memDC.SelectObject(&NewBitmap);//兼容位图选入内存DC
-	DrawObject(&memDC);//绘制小球
-	CollisionDetection();//碰撞检测
-	pDC->BitBlt(0, 0, nWidth, nHeight, &memDC, 0, 0, SRCCOPY);//显示内存位图
+	//定义内存DC
+	CDC memDC;
+	//创建一个显示DC兼容的内存DC
+	memDC.CreateCompatibleDC(pDC);
+
+	CBitmap NewBitmap, *pOldBitmap;
+	//创建兼容内存位图
+	NewBitmap.CreateCompatibleBitmap(pDC, nWidth, nHeight);
+	//兼容位图选入内存DC
+	pOldBitmap = memDC.SelectObject(&NewBitmap);
+	//在兼容DC上绘制小球
+	DrawObject(&memDC);
+	//碰撞检测
+	CollisionDetection();
+	//把内存DC上的位图显示到显示器上
+	pDC->BitBlt(0, 0, nWidth, nHeight, &memDC, 0, 0, SRCCOPY);
+	//选回旧的位图
 	memDC.SelectObject(pOldBitmap);
+	//删除新的位图
 	NewBitmap.DeleteObject();
+	//删除内存DC
 	memDC.DeleteDC();
 }
 
