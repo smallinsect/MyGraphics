@@ -113,12 +113,13 @@ void C缓冲区View::DoubleBuffer(CDC* pDC) {
 }
 ```
 
-
-
 定时器
 
 ```
-
+开启定时器
+UINT_PTR SetTimer(UINT_PTR nIDEvent, UINT nElapse, void (CALLBACK* lpfnTimer)(HWND, UINT, UINT_PTR, DWORD))
+关闭定时器
+BOOL KillTimer(UINT_PTR nIDEvent)
 ```
 
 
